@@ -13,9 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
- export const metadata: Metadata = {
-  title: "SOLARIS SKIN | เซรั่มกันแดดทาตัว ปกป้องสูงสุด ซึมไว ไม่เหนียว",
-  description: "ครีมกันแดดทาตัวสูตรบางเบา SPF50+ PA++++ ปกป้องผิวจากแสงแดด บำรุงผิวกระจ่างใส ไม่ติดขน ไม่ทิ้งคราบขาว",
+  title: "AURA SUN | กันแดดผิวกายเนื้อบางเบา ปกป้องพร้อมบำรุง x2",
+  description: "กันแดดทาตัวสูตรอ่อนโยน SPF50+ PA++++ แตกตัวเป็นน้ำ ซึมซาบไว ให้ผิวเนียนนุ่มกระจ่างใส ไม่เป็นคราบ",
 };
 
 export default function RootLayout({
