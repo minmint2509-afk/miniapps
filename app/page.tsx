@@ -67,20 +67,16 @@ const PRODUCTS = [
 ];
 
 export default function Home() {
-  // state สำหรับจัดการตะกร้าสินค้าเป็น Object { [productId]: quantity }
   const [cart, setCart] = useState({});
   const [isOpenCart, setIsOpenCart] = useState(false);
 
-  // คำนวณจำนวนชิ้นทั้งหมดในตะกร้า
   const totalCartCount = Object.values(cart).reduce((sum, qty) => sum + qty, 0);
 
-  // คำนวณราคารวมทั้งหมด
   const totalPrice = Object.entries(cart).reduce((sum, [id, qty]) => {
     const product = PRODUCTS.find((p) => p.id === Number(id));
     return sum + (product ? product.price * qty : 0);
   }, 0);
 
-  // เพิ่มสินค้าลงตะกร้า
   const addToCart = (productId) => {
     setCart((prev) => ({
       ...prev,
@@ -88,7 +84,6 @@ export default function Home() {
     }));
   };
 
-  // ลดจำนวนสินค้าในตะกร้า
   const removeFromCart = (productId) => {
     setCart((prev) => {
       const updated = { ...prev };
@@ -115,7 +110,6 @@ export default function Home() {
             <a href="#about" className="hover:text-amber-600 transition-colors">จุดเด่นของเรา</a>
           </nav>
           
-          {/* ปุ่มตะกร้าสินค้า */}
           <button 
             onClick={() => setIsOpenCart(true)}
             className="relative bg-stone-900 text-white text-sm font-medium px-5 py-2.5 rounded-full hover:bg-amber-600 transition-colors shadow-sm active:scale-95 cursor-pointer flex items-center gap-2"
@@ -128,7 +122,7 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Pop-up ตะกร้าสินค้าด้านขวา (Cart Drawer) */}
+      {/* Cart Drawer */}
       {isOpenCart && (
         <div className="fixed inset-0 z-50 flex justify-end bg-black/40 backdrop-blur-xs transition-opacity">
           <div className="w-full max-w-md bg-white h-full shadow-2xl p-6 flex flex-col justify-between animate-in slide-in-from-right duration-300">
@@ -145,7 +139,6 @@ export default function Home() {
                 </button>
               </div>
 
-              {/* รายการสินค้าในตะกร้า */}
               <div className="overflow-y-auto max-h-[calc(100vh-220px)] divide-y divide-stone-100">
                 {totalCartCount === 0 ? (
                   <div className="text-center py-16 text-stone-400">
@@ -189,7 +182,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* ส่วนสรุปราคาและปุ่มชำระเงิน */}
             <div className="pt-4 border-t border-stone-100 bg-white">
               <div className="flex justify-between items-center mb-4">
                 <span className="text-stone-600">ราคารวมทั้งหมด</span>
@@ -240,7 +232,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Hero Main Product Image */}
           <div className="relative flex justify-center items-center">
             <div className="absolute w-72 h-72 bg-amber-300/40 rounded-full blur-3xl -z-10" />
             <div className="relative w-full max-w-sm aspect-4/5 bg-white rounded-3xl p-4 shadow-2xl border border-amber-100/50 flex flex-col items-center justify-center overflow-hidden group">
@@ -253,7 +244,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Section: สินค้าทั้งหมด (Products Grid) */}
+        {/* Products Grid */}
         <section id="products" className="scroll-mt-20">
           <div className="text-center max-w-xl mx-auto mb-12">
             <h2 className="text-3xl font-extrabold text-stone-900 mb-3">
@@ -277,7 +268,6 @@ export default function Home() {
                 )}
                 
                 <div>
-                  {/* รูปภาพสินค้า */}
                   <div className="w-full aspect-square bg-stone-100 rounded-2xl overflow-hidden mb-5 relative">
                     <img 
                       src={product.image} 
@@ -286,7 +276,6 @@ export default function Home() {
                     />
                   </div>
 
-                  {/* ข้อมูลสินค้า */}
                   <div className="flex justify-between items-start mb-2">
                     <span className="text-xs font-semibold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-md">
                       {product.category}
@@ -304,7 +293,6 @@ export default function Home() {
                   </p>
                 </div>
 
-                {/* ราคาและปุ่มสั่งซื้อ */}
                 <div className="flex items-center justify-between pt-4 border-t border-stone-100">
                   <div>
                     <span className="text-xs text-stone-400 block">ราคา</span>
