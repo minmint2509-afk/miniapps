@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-// ลิงก์รูปภาพสไตล์เคาน์เตอร์แบรนด์ระดับหรูหรา ผ่าน CDN ที่โหลดได้ 100%
+// รูปภาพกันแดด (Sunscreen/Sunblock) ระดับเคาน์เตอร์แบรนด์สุดหรูหรา 100%
 const PRODUCTS = [
   {
     id: 1,
@@ -12,20 +12,20 @@ const PRODUCTS = [
     originalPrice: 1590,
     rating: "4.95",
     reviews: 128,
-    image: "https://images.pexels.com/photos/3685530/pexels-photo-3685530.jpeg?auto=compress&cs=tinysrgb&w=800",
-    description: "เซรั่มกันแดดเนื้อสัมผัสซิลค์บางเบา ซึมซาบสู่ผิวทันที ปกป้องและฟื้นฟูด้วยสารสกัดดอกไม้ทองคำ",
+    image: "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=800&q=80",
+    description: "กันแดดผิวกายเนื้อหลอดทองสุดพรีเมียม บางเบา ซึมไว ไม่ทิ้งคราบขาว พร้อมกันน้ำยาวนาน",
     badge: "Best Seller",
   },
   {
     id: 2,
-    name: "Solaris Golden Aura Face Serum SPF50+",
+    name: "Solaris Golden Aura Face Cream SPF50+",
     category: "ผิวหน้า",
     price: 1490,
     originalPrice: 1890,
     rating: "4.98",
     reviews: 240,
-    image: "https://images.pexels.com/photos/4041391/pexels-photo-4041391.jpeg?auto=compress&cs=tinysrgb&w=800",
-    description: "กันแดดขวดแก้วหรูหรา คุมมันยาวนาน 16 ชม. มอบลุคงานผิวเนียนกระจ่างใสระดับไฮเอนด์",
+    image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&q=80",
+    description: "ครีมกันแดดผิวหน้าสูตรเคาน์เตอร์แบรนด์ คุมมัน 16 ชม. มอบฟินิชงานผิวฉ่ำโกลว์อย่างเป็นธรรมชาติ",
     badge: "Award Winner",
   },
   {
@@ -36,44 +36,44 @@ const PRODUCTS = [
     originalPrice: 1990,
     rating: "4.90",
     reviews: 89,
-    image: "https://images.pexels.com/photos/6621472/pexels-photo-6621472.jpeg?auto=compress&cs=tinysrgb&w=800",
-    description: "ออยล์กันแดดขวดทองฉ่ำวาว มอบประกายออร่าเนียนนุ่ม พร้อมสารบำรุงต้านริ้วรอยเข้มข้น",
+    image: "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=800&q=80",
+    description: "ออยล์กันแดดละอองทองคำ มอบความฉ่ำวาวระดับไฮเอนด์ สะท้อนแสงแดดเพิ่มออร่าให้ผิว",
     badge: "Exclusive",
   },
   {
     id: 4,
-    name: "Solaris Pure Radiance Essence",
+    name: "Solaris After-Sun Radiance Lotion",
     category: "ฟื้นฟูผิว",
     price: 990,
     originalPrice: 1250,
     rating: "4.88",
     reviews: 156,
-    image: "https://images.pexels.com/photos/8128069/pexels-photo-8128069.jpeg?auto=compress&cs=tinysrgb&w=800",
-    description: "เอสเซนส์บำรุงและฟื้นฟูผิวหลังออกแดด คืนความสดชื่น เติมน้ำให้ผิวเปล่งปลั่งระดับลึก",
+    image: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=800&q=80",
+    description: "โลชั่นปลอบประโลมและฟื้นฟูผิวหลังเผชิญแสงแดด คืนความชุ่มชื้น ป้องกันผิวหมองคล้ำสะสม",
     badge: "New Arrival",
   },
   {
     id: 5,
-    name: "Solaris Sublime Protection Spray SPF50+",
+    name: "Solaris Invisible Shield Mist SPF50+",
     category: "สเปรย์",
     price: 1190,
     originalPrice: 1390,
     rating: "4.85",
     reviews: 74,
-    image: "https://images.pexels.com/photos/7263015/pexels-photo-7263015.jpeg?auto=compress&cs=tinysrgb&w=800",
-    description: "สเปรย์กันแดดละอองไมครอนเนื้อละเอียด ละมุนผิว ไม่ทำให้เมคอัพลอกเลอะระหว่างวัน",
+    image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&q=80",
+    description: "สเปรย์กันแดดฉีดทับเมคอัพ ละอองฝอยละเอียด ไม่เหนียวเหนอะหนะ เติมปกป้องระหว่างวันได้ทันที",
     badge: "",
   },
   {
     id: 6,
-    name: "Solaris Precious Lip Balm SPF30",
+    name: "Solaris Protective Lip Balm SPF30",
     category: "ริมฝีปาก",
     price: 690,
     originalPrice: 850,
     rating: "4.92",
     reviews: 310,
-    image: "https://images.pexels.com/photos/2587370/pexels-photo-2587370.jpeg?auto=compress&cs=tinysrgb&w=800",
-    description: "ทรีทเมนท์ลิปบาล์มเติมความเรียบเนียน ป้องกันริมฝีปากหมองคล้ำจากแสงแดด ผสานวิตามินอี",
+    image: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=800&q=80",
+    description: "ลิปบาล์มกันแดดดีไซน์แท่งหรู เติมความชุ่มชื้น ป้องกันริมฝีปากคล้ำจากรังสี UV",
     badge: "Must Have",
   },
 ];
@@ -117,12 +117,10 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#faf8f5] text-stone-800 font-sans selection:bg-amber-100 relative pb-24">
-      {/* Top Banner */}
       <div className="bg-stone-900 text-amber-200 text-xs py-2.5 text-center font-light tracking-widest uppercase">
         ✨ สั่งซื้อวันนี้ รับฟรีทันที Special Edition Velvet Pouch เมื่อยอดสั่งซื้อครบ ฿2,000
       </div>
 
-      {/* Navigation Bar */}
       <header className="sticky top-0 z-40 backdrop-blur-md bg-[#faf8f5]/90 border-b border-stone-200/60">
         <div className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
           <div className="flex items-center gap-12">
@@ -147,7 +145,6 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Slide Cart */}
       {isOpenCart && (
         <div className="fixed inset-0 z-50 flex justify-end bg-stone-900/50 backdrop-blur-sm">
           <div className="w-full max-w-md bg-white h-full shadow-2xl p-8 flex flex-col justify-between">
@@ -229,7 +226,6 @@ export default function Home() {
       )}
 
       <main className="max-w-7xl mx-auto px-8 space-y-28">
-        {/* Main Hero Banner */}
         <section id="hero" className="py-16 md:py-24 grid md:grid-cols-2 gap-16 items-center">
           <div className="flex flex-col items-start gap-8">
             <div className="flex items-center gap-3">
@@ -245,7 +241,7 @@ export default function Home() {
             </h1>
             
             <p className="text-stone-600 text-base max-w-md leading-relaxed font-light">
-              รังสรรค์คุณค่าการบำรุงขั้นสูตรลับเคาน์เตอร์แบรนด์ เนื้อสัมผัสละมุนดุจซิลค์ ปกป้องผิวเต็มประสิทธิภาพในทุกองศา
+              นวัตกรรมกันแดดระดับไฮเอนด์ ผสานสารบำรุงเข้มข้น เนื้อสัมผัสบางเบา มอบผิวสวยเปี่ยมออร่า ท้าแดดตลอดช่วงเวลาของคุณ
             </p>
             
             <div className="flex flex-col sm:flex-row gap-5 w-full sm:w-auto pt-2">
@@ -270,12 +266,12 @@ export default function Home() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img 
                 src={PRODUCTS[0].image} 
-                alt="Solaris Luxury Product" 
+                alt="Solaris Sunscreen Product" 
                 className="w-full h-full object-cover rounded-xl group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute bottom-6 left-6 right-6 p-4 backdrop-blur-md bg-white/80 rounded-xl border border-white/50 flex justify-between items-center shadow-lg">
                 <div>
-                  <p className="text-[10px] font-semibold uppercase tracking-wider text-amber-700">Signature Collection</p>
+                  <p className="text-[10px] font-semibold uppercase tracking-wider text-amber-700">Signature Item</p>
                   <p className="text-sm font-serif font-bold text-stone-900">{PRODUCTS[0].name}</p>
                 </div>
                 <span className="text-xs font-bold bg-amber-600 text-white px-3 py-1 rounded-full">⭐ {PRODUCTS[0].rating}</span>
@@ -284,12 +280,11 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Product Cards Grid */}
         <section id="products" className="scroll-mt-24">
           <div className="text-center max-w-2xl mx-auto mb-12 space-y-4">
-            <span className="text-amber-700 text-xs font-bold tracking-widest uppercase">OUR LUXURY PRODUCTS</span>
+            <span className="text-amber-700 text-xs font-bold tracking-widest uppercase">OUR LUXURY SUNSCREEN</span>
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-stone-900">
-              ผลิตภัณฑ์ดูแลผิวระดับพรีเมียม
+              นวัตกรรมผลิตภัณฑ์กันแดดพรีเมียม
             </h2>
             <div className="w-12 h-0.5 bg-amber-600 mx-auto"></div>
           </div>
