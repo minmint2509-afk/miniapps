@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-// ข้อมูลรายการสินค้าทั้งหมด
+// 1. เพิ่มรายการสินค้าหลายๆ ชิ้นพร้อมลิงก์รูปภาพ
 const PRODUCTS = [
   {
     id: 1,
@@ -11,7 +11,7 @@ const PRODUCTS = [
     price: 490,
     rating: "4.9",
     image: "https://images.unsplash.com/photo-1608248597263-00079e95906a?w=600&q=80",
-    description: "เซรั่มกันแดดเนื้อน้ำ ซึมไว ไม่เหนียวเหนอะหนะ",
+    description: "เซรั่มกันแดดเนื้อน้ำ ซึมไวภายใน 5 วินาที ไม่เหนียวเหนอะหนะ",
     isBestSeller: true,
   },
   {
@@ -21,7 +21,7 @@ const PRODUCTS = [
     price: 590,
     rating: "4.8",
     image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&q=80",
-    description: "คุมมันยาวนาน 12 ชม. ไม่เยิ้มระหว่างวัน ไม่ทิ้งคราบขาว",
+    description: "สูตรคุมมันยาวนาน 12 ชม. ไม่เยิ้มระหว่างวัน ไม่ทิ้งคราบขาว",
     isBestSeller: true,
   },
   {
@@ -31,7 +31,7 @@ const PRODUCTS = [
     price: 350,
     rating: "4.7",
     image: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=600&q=80",
-    description: "เจลว่านหางจระเข้เข้มข้น ปลอบประโลมผิวไหม้แดดทันที",
+    description: "เจลว่านหางจระเข้เข้มข้น ปลอบประโลมและลดความร้อนสะสมบนผิว",
     isBestSeller: false,
   },
   {
@@ -61,7 +61,7 @@ const PRODUCTS = [
     price: 220,
     rating: "4.8",
     image: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=600&q=80",
-    description: "ลิปบาล์มกันแดด แก้ปากดำคล้ำ เติมความชุ่มชื้นตลอดวัน",
+    description: "ลิปบาล์มกันแดด แก้ปากดำคล้ำ เติมความชุ่มชื้นยาวนาน",
     isBestSeller: false,
   },
 ];
@@ -107,7 +107,6 @@ export default function Home() {
           <nav className="hidden md:flex gap-8 text-sm font-medium text-stone-600">
             <a href="#hero" className="hover:text-amber-600 transition-colors">หน้าแรก</a>
             <a href="#products" className="hover:text-amber-600 transition-colors">สินค้าทั้งหมด</a>
-            <a href="#about" className="hover:text-amber-600 transition-colors">จุดเด่นของเรา</a>
           </nav>
           
           <button 
@@ -122,7 +121,7 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Cart Drawer */}
+      {/* Pop-up Cart Drawer */}
       {isOpenCart && (
         <div className="fixed inset-0 z-50 flex justify-end bg-black/40 backdrop-blur-xs transition-opacity">
           <div className="w-full max-w-md bg-white h-full shadow-2xl p-6 flex flex-col justify-between animate-in slide-in-from-right duration-300">
@@ -203,7 +202,7 @@ export default function Home() {
       )}
 
       <main className="max-w-6xl mx-auto px-6 space-y-24">
-        {/* Hero Section */}
+        {/* Hero Section (ใส่รูปจริงแทนช่องสี่เหลี่ยมสีเหลือง) */}
         <section id="hero" className="py-12 md:py-20 grid md:grid-cols-2 gap-12 items-center">
           <div className="flex flex-col items-start gap-6">
             <span className="bg-amber-100 text-amber-800 text-xs font-semibold px-3 py-1 rounded-full border border-amber-200">
@@ -214,14 +213,14 @@ export default function Home() {
               <span className="text-amber-500">เบาสบาย...</span> ไม่เหนียวเหนอะหนะ
             </h1>
             <p className="text-stone-600 text-lg max-w-md leading-relaxed">
-              นวัตกรรมกันแดดเนื้อบางเบา ซึมไว ปกป้องผิวจาก UVA/UVB และมลภาวะ ปกป้องผิวสวยของคุณได้ตลอดทั้งวัน
+              เซรั่มกันแดดเนื้อน้ำ ซึมไวภายใน 5 วินาที ไม่ติดขน ไม่ทิ้งคราบขาว พร้อมบำรุงผิวให้กระจ่างใสยาวนานตลอดวัน
             </p>
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
               <button
                 onClick={() => addToCart(PRODUCTS[0].id)}
                 className="flex items-center justify-center bg-amber-500 text-white font-semibold h-12 px-8 rounded-full hover:bg-amber-600 active:scale-95 transition-all shadow-md shadow-amber-500/20 cursor-pointer"
               >
-                ซื้อเลย — ฿{PRODUCTS[0].price}
+                เพิ่มลงตะกร้า — ฿{PRODUCTS[0].price}
               </button>
               <a
                 href="#products"
@@ -244,7 +243,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Products Grid */}
+        {/* 2. ส่วนแสดงรายการสินค้าแบบ Grid (เพิ่มเข้ามาใหม่) */}
         <section id="products" className="scroll-mt-20">
           <div className="text-center max-w-xl mx-auto mb-12">
             <h2 className="text-3xl font-extrabold text-stone-900 mb-3">
