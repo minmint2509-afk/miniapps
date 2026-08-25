@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-// 1. เพิ่มรายการสินค้าหลายๆ ชิ้นพร้อมลิงก์รูปภาพ
+// ข้อมูลรายการสินค้าทั้งหมด
 const PRODUCTS = [
   {
     id: 1,
@@ -67,7 +67,7 @@ const PRODUCTS = [
 ];
 
 export default function Home() {
-  const [cart, setCart] = useState({});
+  const [cart, setCart] = useState<{ [key: number]: number }>({});
   const [isOpenCart, setIsOpenCart] = useState(false);
 
   const totalCartCount = Object.values(cart).reduce((sum, qty) => sum + qty, 0);
@@ -77,14 +77,14 @@ export default function Home() {
     return sum + (product ? product.price * qty : 0);
   }, 0);
 
-  const addToCart = (productId) => {
+  const addToCart = (productId: number) => {
     setCart((prev) => ({
       ...prev,
       [productId]: (prev[productId] || 0) + 1,
     }));
   };
 
-  const removeFromCart = (productId) => {
+  const removeFromCart = (productId: number) => {
     setCart((prev) => {
       const updated = { ...prev };
       if (updated[productId] > 1) {
@@ -98,7 +98,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-amber-50/30 text-stone-800 font-sans selection:bg-amber-200 relative pb-20">
-      {/* Navigation */}
+      {/* Header Navigation */}
       <header className="sticky top-0 z-40 backdrop-blur-md bg-white/80 border-b border-stone-100 shadow-xs">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <span className="text-xl font-extrabold tracking-tight text-amber-600">
@@ -121,10 +121,10 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Pop-up Cart Drawer */}
+      {/* Cart Drawer */}
       {isOpenCart && (
         <div className="fixed inset-0 z-50 flex justify-end bg-black/40 backdrop-blur-xs transition-opacity">
-          <div className="w-full max-w-md bg-white h-full shadow-2xl p-6 flex flex-col justify-between animate-in slide-in-from-right duration-300">
+          <div className="w-full max-w-md bg-white h-full shadow-2xl p-6 flex flex-col justify-between">
             <div>
               <div className="flex justify-between items-center pb-4 border-b border-stone-100">
                 <h2 className="text-lg font-bold text-stone-900">
@@ -150,6 +150,7 @@ export default function Home() {
                     if (!item) return null;
                     return (
                       <div key={item.id} className="py-4 flex gap-4 items-center">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img 
                           src={item.image} 
                           alt={item.name} 
@@ -202,7 +203,7 @@ export default function Home() {
       )}
 
       <main className="max-w-6xl mx-auto px-6 space-y-24">
-        {/* Hero Section (ใส่รูปจริงแทนช่องสี่เหลี่ยมสีเหลือง) */}
+        {/* Hero Section */}
         <section id="hero" className="py-12 md:py-20 grid md:grid-cols-2 gap-12 items-center">
           <div className="flex flex-col items-start gap-6">
             <span className="bg-amber-100 text-amber-800 text-xs font-semibold px-3 py-1 rounded-full border border-amber-200">
@@ -234,6 +235,7 @@ export default function Home() {
           <div className="relative flex justify-center items-center">
             <div className="absolute w-72 h-72 bg-amber-300/40 rounded-full blur-3xl -z-10" />
             <div className="relative w-full max-w-sm aspect-4/5 bg-white rounded-3xl p-4 shadow-2xl border border-amber-100/50 flex flex-col items-center justify-center overflow-hidden group">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img 
                 src={PRODUCTS[0].image} 
                 alt="Solaris Main Product" 
@@ -243,7 +245,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 2. ส่วนแสดงรายการสินค้าแบบ Grid (เพิ่มเข้ามาใหม่) */}
+        {/* Products Grid Section */}
         <section id="products" className="scroll-mt-20">
           <div className="text-center max-w-xl mx-auto mb-12">
             <h2 className="text-3xl font-extrabold text-stone-900 mb-3">
@@ -268,6 +270,7 @@ export default function Home() {
                 
                 <div>
                   <div className="w-full aspect-square bg-stone-100 rounded-2xl overflow-hidden mb-5 relative">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img 
                       src={product.image} 
                       alt={product.name} 
