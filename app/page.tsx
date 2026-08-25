@@ -2,73 +2,92 @@
 
 import { useState } from "react";
 
-// ข้อมูลรายการสินค้าทั้งหมด
+// ข้อมูลรายการสินค้าสไตล์ Luxury
 const PRODUCTS = [
   {
     id: 1,
-    name: "Solaris Daily Body Serum SPF50+",
-    category: "กันแดดผิวกาย",
-    price: 490,
-    rating: "4.9",
-    image: "https://images.unsplash.com/photo-1608248597263-00079e95906a?w=600&q=80",
-    description: "เซรั่มกันแดดเนื้อน้ำ ซึมไวภายใน 5 วินาที ไม่เหนียวเหนอะหนะ",
-    isBestSeller: true,
+    name: "Solaris Royal Body Elixir SPF50+ PA++++",
+    category: "ผิวกาย",
+    price: 1290,
+    originalPrice: 1590,
+    rating: "4.95",
+    reviews: 128,
+    image: "https://images.unsplash.com/photo-1608248597263-00079e95906a?w=800&q=80",
+    description: "เซรั่มกันแดดเนื้อสัมผัสซิลค์บางเบา ซึมซาบสู่ผิวทันที ปกป้องและฟื้นฟูด้วยสารสกัดจากดอกไม้นานาพันธุ์",
+    badge: "Best Seller",
   },
   {
     id: 2,
-    name: "Solaris Invisible Face Fluid SPF50+",
-    category: "กันแดดผิวหน้า",
-    price: 590,
-    rating: "4.8",
-    image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&q=80",
-    description: "สูตรคุมมันยาวนาน 12 ชม. ไม่เยิ้มระหว่างวัน ไม่ทิ้งคราบขาว",
-    isBestSeller: true,
+    name: "Solaris Golden Aura Face Fluid SPF50+",
+    category: "ผิวหน้า",
+    price: 1490,
+    originalPrice: 1890,
+    rating: "4.98",
+    reviews: 240,
+    image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&q=80",
+    description: "กันแดดผิวหน้าสูตรพรีเมียม คุมมันยาวนาน 16 ชม. มอบลุคงานผิวเนียนบางเบาสไตล์ Glass Skin",
+    badge: "Award Winner",
   },
   {
     id: 3,
-    name: "Solaris After Sun Soothing Gel",
-    category: "ฟื้นฟูผิวหลังออกแดด",
-    price: 350,
-    rating: "4.7",
-    image: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=600&q=80",
-    description: "เจลว่านหางจระเข้เข้มข้น ปลอบประโลมและลดความร้อนสะสมบนผิว",
-    isBestSeller: false,
+    name: "Solaris Velvet Touch Sun Oil SPF30",
+    category: "ออยล์บำรุง",
+    price: 1690,
+    originalPrice: 1990,
+    rating: "4.90",
+    reviews: 89,
+    image: "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=800&q=80",
+    description: "ออยล์กันแดดฉ่ำวาวเนียนนุ่ม มอบประกายออร่าสีทองเปล่งประกาย พร้อมสารบำรุงต้านริ้วรอย",
+    badge: "Exclusive",
   },
   {
     id: 4,
-    name: "Solaris Glowing Sun Oil SPF30",
-    category: "ออยล์กันแดดผิวฉ่ำ",
-    price: 650,
-    rating: "4.9",
-    image: "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=600&q=80",
-    description: "เพิ่มความโกลว์ให้ผิวฉ่ำวาว กันน้ำ กันเหงื่อ เหมาะกับไปทะเล",
-    isBestSeller: false,
+    name: "Solaris Radiance Repairing Gel",
+    category: "ฟื้นฟูผิว",
+    price: 990,
+    originalPrice: 1250,
+    rating: "4.88",
+    reviews: 156,
+    image: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=800&q=80",
+    description: "เจลฟื้นฟูผิวหลังออกแดด อุดมด้วยไฮยา 8 โมเลกุล คืนความชุ่มชื้นล้ำลึก สดชื่นทันทีที่สัมผัส",
+    badge: "New Arrival",
   },
   {
     id: 5,
-    name: "Solaris Refreshing Sun Mist SPF50+",
-    category: "สเปรย์กันแดด",
-    price: 420,
-    rating: "4.6",
-    image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&q=80",
-    description: "สเปรย์ฉีดทับเมคอัพได้ ละอองละเอียดบางเบา พกพาสะดวก",
-    isBestSeller: false,
+    name: "Solaris Micro-Mist Shield SPF50+",
+    category: "สเปรย์",
+    price: 1190,
+    originalPrice: 1390,
+    rating: "4.85",
+    reviews: 74,
+    image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&q=80",
+    description: "ละอองสเปรย์ความละเอียดระดับไมครอน ฉีดทับเมคอัพได้โดยไม่เป็นคราบ ล็อคความชุ่มชื้นตลอดวัน",
+    badge: "",
   },
   {
     id: 6,
-    name: "Solaris Lip Protection Balm SPF30",
-    category: "บำรุงริมฝีปาก",
-    price: 220,
-    rating: "4.8",
-    image: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=600&q=80",
-    description: "ลิปบาล์มกันแดด แก้ปากดำคล้ำ เติมความชุ่มชื้นยาวนาน",
-    isBestSeller: false,
+    name: "Solaris Nourishing Lip Therapy SPF30",
+    category: "ริมฝีปาก",
+    price: 690,
+    originalPrice: 850,
+    rating: "4.92",
+    reviews: 310,
+    image: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=800&q=80",
+    description: "ทรีทเมนท์ลิปบาล์มเติมเต็มความเรียบเนียน ป้องกันริมฝีปากหมองคล้ำจากแสงแดด ผสานวิตามินอีเข้มข้น",
+    badge: "Must Have",
   },
 ];
+
+const CATEGORIES = ["ทั้งหมด", "ผิวหน้า", "ผิวกาย", "ออยล์บำรุง", "ฟื้นฟูผิว", "สเปรย์", "ริมฝีปาก"];
 
 export default function Home() {
   const [cart, setCart] = useState<{ [key: number]: number }>({});
   const [isOpenCart, setIsOpenCart] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("ทั้งหมด");
+
+  const filteredProducts = selectedCategory === "ทั้งหมด" 
+    ? PRODUCTS 
+    : PRODUCTS.filter((p) => p.category === selectedCategory);
 
   const totalCartCount = Object.values(cart).reduce((sum, qty) => sum + qty, 0);
 
@@ -97,80 +116,87 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-amber-50/30 text-stone-800 font-sans selection:bg-amber-200 relative pb-20">
+    <div className="min-h-screen bg-[#faf8f5] text-stone-800 font-sans selection:bg-amber-100 relative pb-24">
+      {/* Top Announcement Bar */}
+      <div className="bg-stone-900 text-amber-200 text-xs py-2 text-center font-light tracking-widest uppercase">
+        ✨ สั่งซื้อวันนี้ รับฟรีทันที Special Edition Travel Pouch สำหรับทุกยอดสั่งซื้อ ฿2,000 ขึ้นไป
+      </div>
+
       {/* Header Navigation */}
-      <header className="sticky top-0 z-40 backdrop-blur-md bg-white/80 border-b border-stone-100 shadow-xs">
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <span className="text-xl font-extrabold tracking-tight text-amber-600">
-            SOLARIS<span className="text-stone-800">SKIN</span>
-          </span>
-          <nav className="hidden md:flex gap-8 text-sm font-medium text-stone-600">
-            <a href="#hero" className="hover:text-amber-600 transition-colors">หน้าแรก</a>
-            <a href="#products" className="hover:text-amber-600 transition-colors">สินค้าทั้งหมด</a>
-          </nav>
+      <header className="sticky top-0 z-40 backdrop-blur-md bg-[#faf8f5]/90 border-b border-stone-200/60 transition-all">
+        <div className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
+          <div className="flex items-center gap-12">
+            <span className="text-2xl font-serif tracking-widest text-stone-900 font-extrabold uppercase">
+              SOLARIS<span className="text-amber-600 font-sans font-light text-xl">| SKIN</span>
+            </span>
+            <nav className="hidden md:flex gap-8 text-xs font-semibold tracking-widest text-stone-600 uppercase">
+              <a href="#hero" className="hover:text-amber-600 transition-colors">คอลเลกชันใหม่</a>
+              <a href="#products" className="hover:text-amber-600 transition-colors">ผลิตภัณฑ์ทั้งหมด</a>
+            </nav>
+          </div>
           
           <button 
             onClick={() => setIsOpenCart(true)}
-            className="relative bg-stone-900 text-white text-sm font-medium px-5 py-2.5 rounded-full hover:bg-amber-600 transition-colors shadow-sm active:scale-95 cursor-pointer flex items-center gap-2"
+            className="relative border border-stone-900 text-stone-900 hover:bg-stone-900 hover:text-white transition-all duration-300 text-xs font-semibold tracking-widest uppercase px-6 py-3 rounded-full flex items-center gap-3 cursor-pointer"
           >
-            <span>ตะกร้าสินค้า</span>
-            <span className="bg-amber-500 text-stone-900 font-bold px-2 py-0.5 rounded-full text-xs">
+            <span>กระเป๋าช้อปปิ้ง</span>
+            <span className="bg-amber-600 text-white font-bold w-5 h-5 rounded-full flex items-center justify-center text-[10px]">
               {totalCartCount}
             </span>
           </button>
         </div>
       </header>
 
-      {/* Cart Drawer */}
+      {/* Slide Cart Drawer */}
       {isOpenCart && (
-        <div className="fixed inset-0 z-50 flex justify-end bg-black/40 backdrop-blur-xs transition-opacity">
-          <div className="w-full max-w-md bg-white h-full shadow-2xl p-6 flex flex-col justify-between">
+        <div className="fixed inset-0 z-50 flex justify-end bg-stone-900/50 backdrop-blur-sm transition-opacity">
+          <div className="w-full max-w-md bg-white h-full shadow-2xl p-8 flex flex-col justify-between">
             <div>
-              <div className="flex justify-between items-center pb-4 border-b border-stone-100">
-                <h2 className="text-lg font-bold text-stone-900">
-                  ตะกร้าสินค้าของคุณ ({totalCartCount})
+              <div className="flex justify-between items-center pb-6 border-b border-stone-100">
+                <h2 className="text-base font-serif font-bold uppercase tracking-wider text-stone-900">
+                  รายการสินค้าในตะกร้า ({totalCartCount})
                 </h2>
                 <button 
                   onClick={() => setIsOpenCart(false)}
-                  className="text-stone-400 hover:text-stone-800 text-xl font-bold p-1 cursor-pointer"
+                  className="text-stone-400 hover:text-stone-900 text-lg font-light p-1 cursor-pointer transition-colors"
                 >
                   ✕
                 </button>
               </div>
 
-              <div className="overflow-y-auto max-h-[calc(100vh-220px)] divide-y divide-stone-100">
+              <div className="overflow-y-auto max-h-[calc(100vh-240px)] divide-y divide-stone-100">
                 {totalCartCount === 0 ? (
-                  <div className="text-center py-16 text-stone-400">
-                    <p className="text-4xl mb-3">🛒</p>
-                    <p className="font-medium">ไม่มีสินค้าในตะกร้า</p>
+                  <div className="text-center py-20 text-stone-400">
+                    <p className="font-serif italic text-lg mb-2">ตะกร้าสินค้าว่างเปล่า</p>
+                    <p className="text-xs tracking-wider">เลือกผลิตภัณฑ์เพื่อเริ่มประสบการณ์การดูแลผิวระดับพรีเมียม</p>
                   </div>
                 ) : (
                   Object.entries(cart).map(([id, qty]) => {
                     const item = PRODUCTS.find((p) => p.id === Number(id));
                     if (!item) return null;
                     return (
-                      <div key={item.id} className="py-4 flex gap-4 items-center">
+                      <div key={item.id} className="py-5 flex gap-5 items-center">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img 
                           src={item.image} 
                           alt={item.name} 
-                          className="w-16 h-16 object-cover rounded-xl bg-amber-50 border border-stone-100"
+                          className="w-20 h-20 object-cover rounded-xl border border-stone-100"
                         />
                         <div className="flex-1 min-w-0">
-                          <h3 className="font-semibold text-stone-900 text-sm truncate">{item.name}</h3>
-                          <p className="text-amber-600 font-bold text-sm mt-0.5">฿{item.price}</p>
+                          <h3 className="font-serif text-sm font-semibold text-stone-900 truncate">{item.name}</h3>
+                          <p className="text-amber-700 font-semibold text-sm mt-1">฿{item.price.toLocaleString()}</p>
                         </div>
-                        <div className="flex items-center gap-2 border border-stone-200 rounded-lg px-2 py-1 bg-stone-50">
+                        <div className="flex items-center gap-3 border border-stone-200 rounded-full px-3 py-1 bg-stone-50">
                           <button 
                             onClick={() => removeFromCart(item.id)}
-                            className="px-1 text-stone-500 hover:text-stone-900 font-bold cursor-pointer"
+                            className="text-stone-400 hover:text-stone-900 font-semibold cursor-pointer text-sm"
                           >
                             -
                           </button>
-                          <span className="text-sm font-semibold w-4 text-center">{qty}</span>
+                          <span className="text-xs font-semibold w-4 text-center">{qty}</span>
                           <button 
                             onClick={() => addToCart(item.id)}
-                            className="px-1 text-stone-500 hover:text-stone-900 font-bold cursor-pointer"
+                            className="text-stone-400 hover:text-stone-900 font-semibold cursor-pointer text-sm"
                           >
                             +
                           </button>
@@ -182,129 +208,159 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="pt-4 border-t border-stone-100 bg-white">
-              <div className="flex justify-between items-center mb-4">
-                <span className="text-stone-600">ราคารวมทั้งหมด</span>
-                <span className="text-2xl font-black text-amber-600">฿{totalPrice.toLocaleString()}</span>
+            <div className="pt-6 border-t border-stone-100 bg-white space-y-4">
+              <div className="flex justify-between items-baseline">
+                <span className="text-xs font-semibold tracking-widest uppercase text-stone-500">ราคารวมสุทธิ</span>
+                <span className="text-2xl font-serif font-bold text-stone-900">฿{totalPrice.toLocaleString()}</span>
               </div>
               <button 
                 disabled={totalCartCount === 0}
-                className={`w-full py-3.5 rounded-full font-bold transition-all ${
+                className={`w-full py-4 rounded-full font-semibold text-xs tracking-widest uppercase transition-all duration-300 ${
                   totalCartCount > 0 
-                    ? "bg-amber-500 text-white hover:bg-amber-600 shadow-lg shadow-amber-500/25 cursor-pointer active:scale-98" 
+                    ? "bg-stone-900 text-white hover:bg-amber-600 shadow-xl cursor-pointer" 
                     : "bg-stone-200 text-stone-400 cursor-not-allowed"
                 }`}
               >
-                สั่งซื้อสินค้า
+                ดำเนินการชำระเงิน
               </button>
             </div>
           </div>
         </div>
       )}
 
-      <main className="max-w-6xl mx-auto px-6 space-y-24">
-        {/* Hero Section */}
-        <section id="hero" className="py-12 md:py-20 grid md:grid-cols-2 gap-12 items-center">
-          <div className="flex flex-col items-start gap-6">
-            <span className="bg-amber-100 text-amber-800 text-xs font-semibold px-3 py-1 rounded-full border border-amber-200">
-              ☀️ SPF50+ PA++++ Broad Spectrum
-            </span>
-            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight text-stone-900">
-              ปกป้องผิวผิวกาย <br />
-              <span className="text-amber-500">เบาสบาย...</span> ไม่เหนียวเหนอะหนะ
+      <main className="max-w-7xl mx-auto px-8 space-y-28">
+        {/* Luxury Hero Section */}
+        <section id="hero" className="py-16 md:py-24 grid md:grid-cols-2 gap-16 items-center">
+          <div className="flex flex-col items-start gap-8">
+            <div className="flex items-center gap-3">
+              <span className="h-px w-8 bg-amber-600"></span>
+              <span className="text-amber-700 text-xs font-bold tracking-widest uppercase">
+                The Ultimate Protection
+              </span>
+            </div>
+            
+            <h1 className="text-5xl md:text-6xl font-serif font-extrabold tracking-tight leading-tight text-stone-900">
+              สัมผัสความหรูหราแห่งการปกป้อง <br />
+              <span className="italic font-normal text-amber-600">อย่างเป็นธรรมชาติ</span>
             </h1>
-            <p className="text-stone-600 text-lg max-w-md leading-relaxed">
-              เซรั่มกันแดดเนื้อน้ำ ซึมไวภายใน 5 วินาที ไม่ติดขน ไม่ทิ้งคราบขาว พร้อมบำรุงผิวให้กระจ่างใสยาวนานตลอดวัน
+            
+            <p className="text-stone-600 text-base max-w-md leading-relaxed font-light">
+              นวัตกรรมกันแดดระดับไฮเอนด์ ผสานสารบำรุงเข้มข้น เนื้อสัมผัสบางเบา มอบผิวสวยเปี่ยมออร่า ท้าแดดตลอดช่วงเวลาของคุณ
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+            
+            <div className="flex flex-col sm:flex-row gap-5 w-full sm:w-auto pt-2">
               <button
                 onClick={() => addToCart(PRODUCTS[0].id)}
-                className="flex items-center justify-center bg-amber-500 text-white font-semibold h-12 px-8 rounded-full hover:bg-amber-600 active:scale-95 transition-all shadow-md shadow-amber-500/20 cursor-pointer"
+                className="bg-stone-900 text-white font-semibold text-xs tracking-widest uppercase h-14 px-10 rounded-full hover:bg-amber-600 transition-all duration-300 shadow-xl cursor-pointer"
               >
-                เพิ่มลงตะกร้า — ฿{PRODUCTS[0].price}
+                สั่งซื้อเลย — ฿{PRODUCTS[0].price.toLocaleString()}
               </button>
               <a
                 href="#products"
-                className="flex items-center justify-center border border-stone-300 text-stone-700 font-semibold h-12 px-6 rounded-full hover:bg-white transition-all"
+                className="flex items-center justify-center border border-stone-300 text-stone-800 font-semibold text-xs tracking-widest uppercase h-14 px-8 rounded-full hover:border-stone-900 transition-all duration-300"
               >
-                ดูสินค้าทั้งหมด
+                สำรวจคอลเลกชัน
               </a>
             </div>
           </div>
 
           <div className="relative flex justify-center items-center">
-            <div className="absolute w-72 h-72 bg-amber-300/40 rounded-full blur-3xl -z-10" />
-            <div className="relative w-full max-w-sm aspect-4/5 bg-white rounded-3xl p-4 shadow-2xl border border-amber-100/50 flex flex-col items-center justify-center overflow-hidden group">
+            <div className="absolute w-96 h-96 bg-amber-200/40 rounded-full blur-3xl -z-10" />
+            <div className="relative w-full max-w-md aspect-3/4 rounded-2xl p-3 bg-white shadow-2xl border border-stone-100 group overflow-hidden">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img 
                 src={PRODUCTS[0].image} 
-                alt="Solaris Main Product" 
-                className="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition-transform duration-500"
+                alt="Solaris Luxury Product" 
+                className="w-full h-full object-cover rounded-xl group-hover:scale-105 transition-transform duration-700"
               />
+              <div className="absolute bottom-6 left-6 right-6 p-4 backdrop-blur-md bg-white/80 rounded-xl border border-white/50 flex justify-between items-center">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-stone-500">Signature Item</p>
+                  <p className="text-sm font-serif font-bold text-stone-900">{PRODUCTS[0].name}</p>
+                </div>
+                <span className="text-xs font-bold bg-amber-600 text-white px-3 py-1 rounded-full">⭐ {PRODUCTS[0].rating}</span>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Products Grid Section */}
-        <section id="products" className="scroll-mt-20">
-          <div className="text-center max-w-xl mx-auto mb-12">
-            <h2 className="text-3xl font-extrabold text-stone-900 mb-3">
-              สินค้าทั้งหมดของเรา
+        {/* Section: Filterable Products Grid */}
+        <section id="products" className="scroll-mt-24">
+          <div className="text-center max-w-2xl mx-auto mb-12 space-y-4">
+            <span className="text-amber-700 text-xs font-bold tracking-widest uppercase">OUR COLLECTION</span>
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-stone-900">
+              ผลิตภัณฑ์ดูแลผิวทรงประสิทธิภาพ
             </h2>
-            <p className="text-stone-600">
-              เลือกลิขสิทธิ์การดูแลและปกป้องผิวที่เหมาะกับไลฟ์สไตล์ของคุณ
-            </p>
+            <div className="w-12 h-0.5 bg-amber-600 mx-auto"></div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {PRODUCTS.map((product) => (
+          {/* Category Filter Tabs */}
+          <div className="flex flex-wrap justify-center gap-3 mb-14">
+            {CATEGORIES.map((category) => (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`px-6 py-2.5 rounded-full text-xs font-semibold tracking-wider transition-all duration-300 cursor-pointer ${
+                  selectedCategory === category
+                    ? "bg-stone-900 text-white shadow-lg"
+                    : "bg-white text-stone-600 border border-stone-200 hover:border-stone-400"
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+
+          {/* Product Cards Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+            {filteredProducts.map((product) => (
               <div 
                 key={product.id}
-                className="bg-white rounded-3xl p-5 border border-stone-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between relative group"
+                className="bg-white rounded-2xl p-6 border border-stone-100 shadow-sm hover:shadow-2xl transition-all duration-500 flex flex-col justify-between group"
               >
-                {product.isBestSeller && (
-                  <span className="absolute top-8 left-8 z-10 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
-                    ขายดี 🔥
-                  </span>
-                )}
-                
                 <div>
-                  <div className="w-full aspect-square bg-stone-100 rounded-2xl overflow-hidden mb-5 relative">
+                  {/* Image & Badge Container */}
+                  <div className="w-full aspect-square bg-stone-50 rounded-xl overflow-hidden mb-6 relative">
+                    {product.badge && (
+                      <span className="absolute top-4 left-4 z-10 bg-stone-900 text-amber-200 text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full shadow-md">
+                        {product.badge}
+                      </span>
+                    )}
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img 
                       src={product.image} 
                       alt={product.name} 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                   </div>
 
-                  <div className="flex justify-between items-start mb-2">
-                    <span className="text-xs font-semibold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-md">
+                  <div className="flex justify-between items-center mb-3">
+                    <span className="text-[11px] font-semibold tracking-widest uppercase text-amber-700 bg-amber-50 px-3 py-1 rounded-full">
                       {product.category}
                     </span>
-                    <span className="text-xs font-bold text-stone-500 flex items-center gap-1">
-                      ⭐ {product.rating}
+                    <span className="text-xs font-bold text-stone-500">
+                      ★ {product.rating} ({product.reviews})
                     </span>
                   </div>
 
-                  <h3 className="font-bold text-stone-900 text-lg mb-2 line-clamp-1">
+                  <h3 className="font-serif font-bold text-stone-900 text-lg mb-2 line-clamp-1 group-hover:text-amber-600 transition-colors">
                     {product.name}
                   </h3>
-                  <p className="text-stone-500 text-sm mb-6 line-clamp-2 leading-relaxed">
+                  <p className="text-stone-500 text-xs mb-6 line-clamp-2 leading-relaxed font-light">
                     {product.description}
                   </p>
                 </div>
 
-                <div className="flex items-center justify-between pt-4 border-t border-stone-100">
+                <div className="flex items-center justify-between pt-5 border-t border-stone-100">
                   <div>
-                    <span className="text-xs text-stone-400 block">ราคา</span>
-                    <span className="text-xl font-extrabold text-stone-900">฿{product.price}</span>
+                    <span className="text-xs text-stone-400 line-through block">฿{product.originalPrice}</span>
+                    <span className="text-xl font-serif font-bold text-stone-900">฿{product.price.toLocaleString()}</span>
                   </div>
                   <button
                     onClick={() => addToCart(product.id)}
-                    className="bg-stone-900 hover:bg-amber-600 text-white text-sm font-semibold px-4 py-2.5 rounded-full transition-colors active:scale-95 cursor-pointer flex items-center gap-2"
+                    className="bg-stone-900 hover:bg-amber-600 text-white text-xs font-semibold tracking-wider uppercase px-5 py-3 rounded-full transition-all duration-300 cursor-pointer shadow-md"
                   >
-                    <span>+ เพิ่มลงตะกร้า</span>
+                    + ใส่ตะกร้า
                   </button>
                 </div>
               </div>
